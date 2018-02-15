@@ -8,7 +8,12 @@
 
 // Code here
 
-
+function CarFactory(make,model){
+  return {
+    make: make,
+    model: model,
+  }
+}
 
 
 

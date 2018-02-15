@@ -3,9 +3,9 @@
 \******************************************************************************/
 
 function outer() {
-    var name = 'Tyler';
-    return function() {
-      return 'The original name was ' + name;
+  var name = 'Tyler';
+  return function() {
+    return 'The original name was ' + name;
     }
   }
   
@@ -16,10 +16,12 @@ function outer() {
   
   // Code Here
   
+  let inner = outer();
+
   //Once you do that, invoke inner.
   
   //Code Here
-  
+  inner();
   
   
   
@@ -45,13 +47,15 @@ function outer() {
   /* Above you're given a callFriend function that returns the dial function.
   
   Store the result of invoking callFriend in a variable named callJake.
-  
+
   When callJake is invoked with '435-555-9248', it returns 'Calling Jake at 435-555-9248' 
   (HINT: You will need to pass in arguments to both function invocations)
   */
   
     //Code Here
-  
+   let callJake = callFriend('Jake')
+
+   callJake('435-555-9248')
   
   
   
@@ -70,12 +74,19 @@ function outer() {
   
   //Code Here
   
+  function makeCounter() {
+    let number = 0;
+    return function count() {
+      return number += 1;
+    }
+  }
+
   //Uncomment this once you make your function
-  //   var count = makeCounter();
-  //   count(); // 1
-  //   count(); // 2
-  //   count(); // 3
-  //   count(); // 4
+    var count = makeCounter();
+    count(); // 1
+    count(); // 2
+    count(); // 3
+    count(); // 4
   
   
   
@@ -104,18 +115,22 @@ function outer() {
   
     // Code here.
   
-  
     return {
-
+      inc: function() {
+        return value += 1;
+      },
+      dec: function() {
+        return value -= 1;
+      }
     }
   }
   
   
   counter = counterFactory(10);
-  // counter.inc() // 11
-  // counter.inc() // 12
-  // counter.inc() // 13
-  // counter.dec() // 12
+  counter.inc() // 11
+  counter.inc() // 12
+  counter.inc() // 13
+  counter.dec() // 12
   
   
   
@@ -142,10 +157,12 @@ function outer() {
     var welcomeText = 'You\'re doing awesome, keep it up ';
   
     // code message function here.
-  
+    return function message() {
+      return welcomeText + firstname + ' ' + lastname + '.'
+    }
   
     //Uncommment this to return the value of your message function
-    //return message;
+    return message;
   
   }
   
@@ -183,12 +200,14 @@ function outer() {
     // Anything that is being returned is made public and can be invoked from
     // outside our lexical scope
     return {
-      // Code here.
+      publicMethod: function() {
+        return privateMethod();
+      }
     };
   
   })();
   
-  
+  module.publicMethod();
   
   /******************************************************************************\
    #PROBLEM-07
@@ -203,6 +222,8 @@ function outer() {
 
     return {
       // Code here
+      addToSecret: (amt) => {return secret += amt},
+      takeAwayFromSecret: (amt) => {return secret -= amt}
     }
   }
   
@@ -229,7 +250,7 @@ function outer() {
    */
   
   function timeOutCounter() {
-    for (var i = 0; i <= 5; i++) {
+    for (let i = 0; i <= 5; i++) {
       setTimeout(function() {
           console.log(i)
       }, i * 1000)
